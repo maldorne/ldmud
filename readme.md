@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="400" alt="LDMud logo" src="https://www.ldmud.eu/img/ldmud-logo.png">
+  <img width="200" alt="LDMud logo" src="/ldmud-logo.svg">
 </p>
 
 > [!IMPORTANT]  
