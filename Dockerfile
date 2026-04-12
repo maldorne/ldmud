@@ -2,7 +2,7 @@
 #  build LDMud 3.6.8 on Debian 12 (bookworm)
 # #### #### #### #### #### #### #### #### #### #### #### #### ####
 
-FROM --platform=linux/amd64 debian:bookworm-slim
+FROM debian:bookworm-slim
 
 LABEL org.opencontainers.image.source="https://github.com/maldorne/ldmud"
 
