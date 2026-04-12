@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="200" alt="LDMud logo" src="/ldmud-logo.svg">
+</p>
+
 # LDMud — `3.6.8`
 
 Docker image for [LDMud](https://github.com/ldmud/ldmud) version `3.6.8` (latest stable, 2025), built on Debian 12 Bookworm with MySQL/MariaDB and SQLite support enabled.
@@ -11,7 +15,7 @@ This branch publishes `ghcr.io/maldorne/ldmud:3.6.8` on every push, via the work
 - MariaDB client libraries for `db_connect()` / `db_exec()` LPC efuns
 - SQLite support for `sl_open()` / `sl_exec()` LPC efuns
 - `git` and `openssh-client` for use as a base for runner images
-- Unprivileged user `mud` (uid 4201, gid 4200) — same as the MudOS images
+- Unprivileged user `mud` (uid 4201, gid 4200)
 
 The source is cloned from the official [ldmud/ldmud](https://github.com/ldmud/ldmud) repository at the `3.6.8` tag during the Docker build. No source code is stored in this repo.
 
