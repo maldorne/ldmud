@@ -14,7 +14,6 @@ Docker images for the [LDMud](https://github.com/ldmud/ldmud) driver, built on D
 | Branch  | LDMud version           | Status              |
 | ------- | ----------------------- | ------------------- |
 | `3.6.8` | Latest stable (2025)    | Working with Docker |
-| `3.3.720` | Legacy stable (2011)  | Working with Docker |
 
 The `master` branch is empty, switch to any version branch to see its contents.
 
