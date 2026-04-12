@@ -1,30 +1,32 @@
-<p align="center">
-  <img width="400" alt="LDMud logo" src="https://www.ldmud.eu/img/ldmud-logo.png">
-</p>
+# LDMud — `3.6.8`
 
-> [!IMPORTANT]  
-> The `master` branch is empty, the code for different versions is located in other branches.
+Docker image for [LDMud](https://github.com/ldmud/ldmud) version `3.6.8` (latest stable, 2025), built on Debian 12 Bookworm with MySQL/MariaDB and SQLite support enabled.
 
-# LDMud driver — Docker images
+This branch publishes `ghcr.io/maldorne/ldmud:3.6.8` on every push, via the workflow at `.github/workflows/publish-ghcr.yaml`.
 
-Docker images for the [LDMud](https://github.com/ldmud/ldmud) driver, built on Debian 12 (Bookworm). Each branch compiles a specific tagged version of LDMud from the [official repository](https://github.com/ldmud/ldmud) at build time.
+## What this image provides
 
-## Branches
+- The `ldmud` driver binary at `/opt/mud/bin/ldmud`
+- The `erq` external request daemon at `/opt/mud/libexec/erq` (if the build produces it)
+- MariaDB client libraries for `db_connect()` / `db_exec()` LPC efuns
+- SQLite support for `sl_open()` / `sl_exec()` LPC efuns
+- `git` and `openssh-client` for use as a base for runner images
+- Unprivileged user `mud` (uid 4201, gid 4200) — same as the MudOS images
 
-| Branch  | LDMud version           | Status              |
-| ------- | ----------------------- | ------------------- |
-| `3.6.8` | Latest stable (2025)    | Working with Docker |
-| `3.3.720` | Legacy stable (2011)  | Working with Docker |
+The source is cloned from the official [ldmud/ldmud](https://github.com/ldmud/ldmud) repository at the `3.6.8` tag during the Docker build. No source code is stored in this repo.
 
-The `master` branch is empty, switch to any version branch to see its contents.
+> [!NOTE]
+> LDMud 3.6+ enforces UTF-8 encoding for LPC source files. Mudlibs with source files in ISO-8859-1 or other legacy encodings will fail to compile on this version. Use `3.3.720` for those.
 
-### Images on GHCR
+## Running standalone
 
-If you want to test the images in your local machine, you can use them directly from the [Github Container Registry](https://github.com/maldorne/ldmud/pkgs/container/ldmud).
+```sh
+docker run --rm -ti -p 5050:5050 \
+  -v /path/to/your/mudlib:/mud/lib \
+  ghcr.io/maldorne/ldmud:3.6.8 \
+  /opt/mud/bin/ldmud -m /mud/lib -M secure/master.c 5050
+```
 
-## Usage at Maldorne
+## Other versions
 
-| Version   | Used by                                                  | Notes                                                                                          |
-| --------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `3.3.720` | [Endor](https://maldorne.org/games/#endor-mud)           | Required because the mudlib is encoded in ISO-8859-1; LDMud 3.6+ enforces UTF-8 source files. |
-| `3.6.8`   | —                                                        | Compiled and published, not used by any of our MUDs. Available for future projects.            |
+Switch branches to find images for other LDMud versions: `3.3.720`. The `master` branch only has the project overview.
