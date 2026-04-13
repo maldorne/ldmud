@@ -20,7 +20,7 @@ This branch publishes `ghcr.io/maldorne/ldmud:3.6.8` on every push, via the work
 The source is cloned from the official [ldmud/ldmud](https://github.com/ldmud/ldmud) repository at the `3.6.8` tag during the Docker build. No source code is stored in this repo.
 
 > [!NOTE]
-> LDMud 3.6+ enforces UTF-8 encoding for LPC source files. Mudlibs with source files in ISO-8859-1 or other legacy encodings will fail to compile on this version. Use `3.3.720` for those.
+> LDMud 3.6+ enforces UTF-8 encoding for LPC source files. The master object must be pure 7-bit ASCII (use `\uXXXX` escapes for non-ASCII characters). Set the `H_FILE_ENCODING` hook to `"UTF-8"` in `inaugurate_master()` so all other files are loaded as UTF-8.
 
 ## Running standalone
 
@@ -33,4 +33,4 @@ docker run --rm -ti -p 5050:5050 \
 
 ## Other versions
 
-Switch branches to find images for other LDMud versions: `3.3.720`. The `master` branch only has the project overview.
+The `master` branch only has the project overview.
