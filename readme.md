@@ -23,7 +23,6 @@ If you want to test the images in your local machine, you can use them directly 
 
 ## Usage at Maldorne
 
-| Version   | Used by                                                  | Notes                                                                                          |
-| --------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `3.3.720` | [Endor](https://maldorne.org/games/#endor-mud)           | Required because the mudlib is encoded in ISO-8859-1; LDMud 3.6+ enforces UTF-8 source files. |
-| `3.6.8`   | —                                                        | Compiled and published, not used by any of our MUDs. Available for future projects.            |
+| Version | Used by                                        | Notes                                                                                                    |
+| ------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `3.6.8` | [Endor](https://maldorne.org/games/#endor-mud) | Mudlib converted to UTF-8. Default file encoding patched from ASCII to UTF-8 so the master can compile. |
