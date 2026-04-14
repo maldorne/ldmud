@@ -6,22 +6,27 @@ FROM debian:bookworm-slim
 
 LABEL org.opencontainers.image.source="https://github.com/maldorne/ldmud"
 
-# install build deps + runtime deps for mysql/sqlite/pcre support
+# install build deps + runtime deps for mysql/sqlite/pcre support.
+# git+ssh are also added so the resulting image can later be reused
+# as a base for runner images that clone game code at startup.
 RUN apt-get update && apt-get install -y --no-install-recommends \
       build-essential bison autoconf automake pkg-config \
       libmariadb-dev-compat libmariadb-dev libsqlite3-dev libpcre3-dev \
       git openssh-client ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
-# create group and user, same uids as the mudos images for consistency
+# create group and user (same uids used across all maldorne driver images)
 RUN groupadd -g 4200 mud \
  && useradd  -u 4201 -g 4200 -ms /bin/bash mud
+USER mud
 
-# clone the specific tagged version from the official LDMud repo
-WORKDIR /tmp
-RUN git clone --branch 3.6.8 --depth 1 https://github.com/ldmud/ldmud.git ldmud-src
+WORKDIR /opt/mud
+COPY --chown=mud:mud src      /opt/mud/src/
+COPY --chown=mud:mud autoconf /opt/mud/autoconf/
+COPY --chown=mud:mud mudlib   /opt/mud/mudlib/
+COPY --chown=mud:mud doc      /opt/mud/doc/
 
-WORKDIR /tmp/ldmud-src/src
+WORKDIR /opt/mud/src
 
 RUN ./autogen.sh
 
@@ -37,11 +42,5 @@ RUN make install-utils || true
 
 # verify binaries were produced
 RUN ls -la /opt/mud/bin/
-
-# clean up build artifacts
-WORKDIR /opt/mud
-RUN rm -rf /tmp/ldmud-src
-
-USER mud
 
 EXPOSE 5000/tcp

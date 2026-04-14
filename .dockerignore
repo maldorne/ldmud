@@ -1,0 +1,16 @@
+.git
+.github
+*.md
+*.svg
+LICENSE
+CHANGELOG
+CHANGELOG.OLD
+COPYRIGHT
+CREDITS
+HISTORY
+INSTALL
+README
+etc
+gdb
+mud
+test
