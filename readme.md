@@ -2,11 +2,13 @@
   <img width="200" alt="LDMud logo" src="/ldmud-logo.svg">
 </p>
 
-# LDMud — `3.6.8`
+# LDMud — `3.6.8-maldorne`
 
-Docker image for [LDMud](https://github.com/ldmud/ldmud) version `3.6.8` (latest stable, 2025), built on Debian 12 Bookworm with MySQL/MariaDB and SQLite support enabled.
+Maldorne fork of [LDMud](https://github.com/ldmud/ldmud) `3.6.8`, built on Debian 12 Bookworm with MySQL/MariaDB and SQLite support enabled, plus the following additions:
 
-This branch publishes `ghcr.io/maldorne/ldmud:3.6.8` on every push, via the workflow at `.github/workflows/publish-ghcr.yaml`.
+- **PROXY protocol v1 support** (`#define SUPPORT_PROXY_PROTOCOL`). The driver auto-detects incoming PROXY protocol headers (as sent by HAProxy, Traefik, etc.) and uses the real client IP instead of the proxy's IP. Connections without a PROXY header work normally. Supports both IPv4 and IPv6 (with IPv4-to-IPv6 mapping when compiled with `USE_IPV6`).
+
+This branch publishes `ghcr.io/maldorne/ldmud:3.6.8-maldorne` on every push, via the workflow at `.github/workflows/publish-ghcr.yaml`.
 
 ## What this image provides
 
@@ -27,7 +29,7 @@ The source is cloned from the official [ldmud/ldmud](https://github.com/ldmud/ld
 ```sh
 docker run --rm -ti -p 5050:5050 \
   -v /path/to/your/mudlib:/mud/lib \
-  ghcr.io/maldorne/ldmud:3.6.8 \
+  ghcr.io/maldorne/ldmud:3.6.8-maldorne \
   /opt/mud/bin/ldmud -m /mud/lib -M secure/master.c 5050
 ```
 

@@ -1,5 +1,5 @@
 # #### #### #### #### #### #### #### #### #### #### #### #### ####
-#  build LDMud 3.6.8 on Debian 12 (bookworm)
+#  build LDMud 3.6.8-maldorne on Debian 12 (bookworm)
 # #### #### #### #### #### #### #### #### #### #### #### #### ####
 
 FROM debian:bookworm-slim
@@ -35,7 +35,8 @@ RUN ./configure \
       --bindir=/opt/mud/bin \
       --libexecdir=/opt/mud/libexec \
       --enable-use-mysql \
-      --enable-use-sqlite
+      --enable-use-sqlite \
+      --enable-use-proxy-protocol
 
 RUN make install-driver
 RUN make install-utils || true
